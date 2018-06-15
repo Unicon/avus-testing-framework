@@ -1,0 +1,18 @@
+{
+  "@class" : "org.apereo.cas.support.saml.services.SamlRegisteredService",
+  "serviceId" : "https://sp.idptestbed/shibboleth",
+  "name" : "SAMLService",
+  "id" : 10000003,
+  "evaluationOrder" : 10,
+  "metadataLocation" : "file:/etc/cas/saml/sp-metadata.xml",
+  "attributeReleasePolicy" : {
+    "@class" : "org.apereo.cas.services.ReturnMappedAttributeReleasePolicy",
+    "allowedAttributes" : {
+      "@class" : "java.util.TreeMap",
+      "username" : "urn:oid:0.9.2342.19200300.100.1.1",
+      "sn" : "urn:oid:2.5.4.4",
+      "givenName" : "urn:oid:2.5.4.4",
+      "email" : "urn:oid:0.9.2342.19200300.100.1.3"
+    }
+  }
+}

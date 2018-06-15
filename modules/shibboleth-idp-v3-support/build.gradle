@@ -1,0 +1,7 @@
+apply plugin : 'groovy'
+
+description = "Avus Shibboleth IdP v3 Support"
+
+dependencies {
+    compile project(':modules:saml-protocols')
+}

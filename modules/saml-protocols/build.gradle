@@ -1,0 +1,10 @@
+apply plugin : 'groovy'
+
+description = "Avus SAML Protocols Support"
+
+dependencies {
+    compile project(':modules:core')
+    compile group: 'javax.servlet', name: 'servlet-api', version: '2.5'
+    compile group: 'org.opensaml', name: 'opensaml-core', version: '3.3.0'
+    compile group: 'org.opensaml', name: 'opensaml-saml-impl', version: '3.3.0'
+}

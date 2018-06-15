@@ -1,0 +1,12 @@
+version: "3.3"
+
+services:
+  bootiful-cas:
+    build: ./bootiful-cas/
+    ports:
+     - "8443:8443"
+
+  phpcas:
+    build: ./phpcas/
+    ports:
+      - "80:80"

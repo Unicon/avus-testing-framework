@@ -1,0 +1,16 @@
+version: "3.3"
+
+services:
+  idp:
+    build: ./idp/
+    environment:
+     - JETTY_MAX_HEAP=64m
+     - JETTY_BROWSER_SSL_KEYSTORE_PASSWORD=password
+     - JETTY_BACKCHANNEL_SSL_KEYSTORE_PASSWORD=password
+    ports:
+     - "4443:4443"
+  
+  ldap:
+    build: ./ldap/
+    expose:
+     - "389"

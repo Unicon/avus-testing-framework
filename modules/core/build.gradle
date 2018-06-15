@@ -1,0 +1,10 @@
+apply plugin : 'groovy'
+
+description = "Avus Core Library"
+
+dependencies {
+    compile group: 'org.codehaus.groovy', name: 'groovy-all', version: '2.4.13'
+    compile group: 'org.spockframework', name: 'spock-core', version:'1.1-groovy-2.4'
+    compile group: 'org.gebish', name: 'geb-spock', version: '2.1'
+    compile group: 'org.seleniumhq.selenium', name: 'selenium-api', version: '3.12.0'
+}

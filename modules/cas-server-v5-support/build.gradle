@@ -1,0 +1,7 @@
+apply plugin : 'groovy'
+
+description = "Avus CAS Server v5 Support"
+
+dependencies {
+    compile project(':modules:cas-protocols')
+}

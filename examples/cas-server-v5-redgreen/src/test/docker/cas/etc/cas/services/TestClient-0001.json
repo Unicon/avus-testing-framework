@@ -1,0 +1,19 @@
+{
+  @class: org.apereo.cas.services.RegexRegisteredService
+  serviceId: http://localhost/dummyapp/authn
+  name: Test Client
+  id: 0001
+  description: Basic Test App
+  evaluationOrder: 0
+  attributeReleasePolicy: {
+    @class: org.apereo.cas.services.ReturnAllAttributeReleasePolicy
+  }
+  accessStrategy: {
+    @class: org.apereo.cas.services.DefaultRegisteredServiceAccessStrategy
+    order: 0
+    enabled: true
+    ssoEnabled: true
+    requireAllAttributes: true
+    caseInsensitive: false
+  }
+}

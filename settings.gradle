@@ -1,0 +1,7 @@
+rootProject.name = 'avus-testing-framework'
+
+include 'modules:core'
+include 'modules:cas-protocols'
+include 'modules:cas-server-v5-support'
+include 'modules:saml-protocols'
+include 'modules:shibboleth-idp-v3-support'

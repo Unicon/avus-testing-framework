@@ -1,0 +1,10 @@
+apply plugin : 'groovy'
+
+description = "Avus CAS Protocols Support"
+
+dependencies {
+    compile project(':modules:core')
+    compile group: 'javax.servlet', name: 'servlet-api', version: '2.5'
+    compile group: 'org.jasig.cas.client', name: 'cas-client-core', version: '3.5.0'
+    compile group: 'org.jasig.cas.client', name: 'cas-client-support-saml', version: '3.5.0'
+}

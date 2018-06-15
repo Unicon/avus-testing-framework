@@ -1,0 +1,28 @@
+defaultTasks "clean", "test"
+
+apply plugin: 'groovy'
+
+group = 'edu.example.cas.test-harness'
+
+description = "Red Green Testing CAS Server"
+
+tasks.withType(JavaCompile) {
+	options.encoding = 'UTF-8'
+    sourceCompatibility = 1.8
+    targetCompatibility = 1.8
+}
+
+tasks.withType(Test) {
+    Runtime.runtime.availableProcessors().intdiv(2) ?: 1
+}
+
+dependencies {
+    testCompile (group: 'net.unicon.avus', name: 'cas-server-v5-support', version: '1.0-SNAPSHOT') { changing=true }
+    testCompile group: 'org.seleniumhq.selenium', name: 'htmlunit-driver', version:'2.30.0'
+    testCompile group: 'org.slf4j', name: 'slf4j-simple', version: '1.7.25'
+}
+
+repositories {
+     mavenLocal()
+     maven { url "http://repo.maven.apache.org/maven2" }
+}

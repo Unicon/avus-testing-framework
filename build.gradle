@@ -1,0 +1,110 @@
+defaultTasks "clean", "build"
+
+apply plugin: 'maven'
+
+tasks.withType(JavaCompile) {
+	options.encoding = 'UTF-8'
+}
+
+allprojects {
+    group = 'net.unicon.avus'
+    version = '1.0-SNAPSHOT'
+}
+
+ext {
+    ext.useGpgSigning = Boolean.parseBoolean(System.getProperty('useGpgSigning', 'false'))
+    ext.isReleaseVersion = !version.endsWith('SNAPSHOT')
+}
+
+subprojects {
+    repositories {
+        jcenter()
+        maven { url "http://repo.maven.apache.org/maven2" }
+        maven { url "https://build.shibboleth.net/nexus/content/repositories/releases" }
+        maven { url "https://build.shibboleth.net/nexus/content/repositories/thirdparty" }
+    }
+
+    apply plugin: 'groovy'
+    apply plugin: 'maven'
+    apply plugin: 'signing'
+
+    task sourcesJar(type: Jar, dependsOn: classes) {
+        classifier = 'sources'
+        from sourceSets.main.allSource
+    }
+
+    task javadocJar(type:Jar) {
+        classifier = 'javadoc'
+        from groovydoc.outputs
+    }
+
+    artifacts {
+        archives jar
+        archives javadocJar
+        archives sourcesJar
+    }
+
+    signing {
+        required { isReleaseVersion }
+
+        if (useGpgSigning) {
+            useGpgCmd()
+        }
+            sign configurations.archives
+
+    }
+
+    uploadArchives {
+        repositories {
+            mavenDeployer {
+                beforeDeployment { MavenDeployment deployment -> signing.signPom(deployment) }
+
+
+                if (isReleaseVersion) {
+                    repository(url: "https://oss.sonatype.org/service/local/staging/deploy/maven2/") {
+                        authentication(userName: sonatypeUsername, password: sonatypePassword);
+                    }
+                }
+
+                if (!isReleaseVersion) {
+                    snapshotRepository(url: "https://oss.sonatype.org/content/repositories/snapshots/") {
+                        authentication(userName: sonatypeUsername, password: sonatypePassword);
+                    }
+                }
+
+                pom.project {
+                    inceptionYear 2018
+                    name project.name
+                    description project.name
+                    packaging 'jar'
+
+                    scm {
+                        url 'scm:git@github.com:Unicon/avus-testing-framework.git'
+                        connection 'scm:git@github.com:Unicon/avus-testing-framework.git'
+                        developerConnection 'scm:git@github.com:Unicon/avus-testing-framework.git'
+                    }
+
+                    licenses {
+                        license {
+                            name 'The Apache Software License, Version 2.0'
+                            url 'http://www.apache.org/licenses/LICENSE-2.0.txt'
+                            distribution 'repo'
+                        }
+                    }
+
+                    developers {
+                        developer {
+                            id 'jtgasper3'
+                            name 'John Gasper'
+                        }
+                    }
+                }
+            }
+        }
+    }
+}
+
+subprojects {
+    sourceCompatibility = 1.8
+    targetCompatibility = 1.8
+}
