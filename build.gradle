@@ -8,7 +8,7 @@ tasks.withType(JavaCompile) {
 
 allprojects {
     group = 'net.unicon.avus'
-    version = '1.0.0'
+    version = '1.0.1-SNAPSHOT'
 }
 
 ext {
