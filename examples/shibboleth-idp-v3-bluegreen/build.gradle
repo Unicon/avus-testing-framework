@@ -16,6 +16,12 @@ tasks.withType(Test) {
     maxParallelForks = Runtime.runtime.availableProcessors().intdiv(2) ?: 1
 }
 
+test {
+    //Pass command-line into the spawned JVM instance
+    systemProperty "username", System.getProperty("username")
+    systemProperty "password", System.getProperty("password")
+}
+
 dependencies {
     testCompile (group: 'net.unicon.avus', name: 'shibboleth-idp-v3-support', version: '1.0-SNAPSHOT') { changing=true }
     testCompile group: 'org.seleniumhq.selenium', name: 'htmlunit-driver', version: '2.30.0'
