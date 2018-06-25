@@ -19,6 +19,10 @@ repositories {
      maven { url "http://repo.maven.apache.org/maven2" }
 }
 
+tasks.withType(Test) {
+    maxParallelForks = Runtime.runtime.availableProcessors().intdiv(2) ?: 1
+}
+
 dependencies {
     testCompile group: 'net.unicon.avus', name: 'shibboleth-idp-v3-support', version: '1.0-SNAPSHOT'
     testCompile group: 'org.seleniumhq.selenium', name: 'selenium-htmlunit-driver', version:'2.52.0'
